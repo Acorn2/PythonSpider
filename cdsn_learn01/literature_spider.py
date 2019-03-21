@@ -34,18 +34,18 @@ def get_page(keywords,offset):
         return None
 
 #经尝试，本程序适合使用BeautifulSoup来爬取相应的内容
-def get_images(text):
-    # pattern = re.compile('<div.*?class="sc_content".*?<h3.*?><a.*?href="(.*?)".*?>(.*?)</a></h3>.*?</div>',re.S)
-    pattern = re.compile('<div.*?class="sc_content">.*?<h3.*?><a.*?href="(.+?)".*?>.*?</h3>.*?</div>',re.S)
-    results = re.findall(pattern,text.replace('\n','').strip())
-    for item in results:
-        print(item.encode('utf-8'))
+# def get_images(text):
+#     # pattern = re.compile('<div.*?class="sc_content".*?<h3.*?><a.*?href="(.*?)".*?>(.*?)</a></h3>.*?</div>',re.S)
+#     pattern = re.compile('<div.*?class="sc_content">.*?<h3.*?><a.*?href="(.+?)".*?>.*?</h3>.*?</div>',re.S)
+#     results = re.findall(pattern,text.replace('\n','').strip())
+#     for item in results:
+#         print(item.encode('utf-8'))
 
 #对于每页的文献信息（每页基本包含10篇文献），提取所有的文献主题、作者、摘要、文献详细地址
 def get_urls(text):
     all_titles = []#主题
-    all_abstracts = []#作者
-    all_authors = []#摘要
+    all_abstracts = []#摘要
+    all_authors = []#作者
     all_paper_urls = []#论文初步网址
 
     soup = BeautifulSoup(text,'lxml')
@@ -116,7 +116,6 @@ def get_download(url):
 def get_download_urls(text):
     download_urls = []
 
-    # pattern = re.compile('<div.*?id="savelink_wr".*?<a.*?class="dl_item".*?href="(.*?).*?<span.*?class="dl_lib".*?>(.*?)</span>.*?</div>',re.S)
     pattern = re.compile('<a.*?class="dl_item".*?href="(.*?)".*?<span.*?class="dl_lib">(.*?)</span>',re.S)
     results = re.findall(pattern,text)
     for item in results:
@@ -156,7 +155,7 @@ if __name__ == '__main__':
     #   日期：2019-03-12
     #   语言：Python 3.7
     #   操作：输入关键词后爬取所有相关文献信息，将文献主题，作者，摘要，可免费下载的网址爬取下来并保存到本地文件
-    #   功能：将需要查询的文献信息打包txt存储到本地。
+    #   功能：将查询的文献信息免费下载地址打包txt存储到本地。
     #---------------------------------------
     """
 
@@ -179,5 +178,4 @@ if __name__ == '__main__':
         save_data(papers)
 
     print("保存成功！")
-
 
