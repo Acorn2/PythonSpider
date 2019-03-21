@@ -11,10 +11,10 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC#具体介绍参考：https://blog.csdn.net/kelanmomo/article/details/82886718
 from selenium.webdriver.support.wait import WebDriverWait
-from urllib.parse import quote
 from pyquery import PyQuery as pq
 import json
 from pymongo import MongoClient
+from urllib.parse import quote
 
 browser = webdriver.Chrome()
 wait = WebDriverWait(browser,10)
@@ -39,8 +39,8 @@ def index_page(page):
     print('正在爬取第',page,'页')
     try:
         # url = 'https://s.taobao.com/search?q=' + quote(KeyWord)
+        # print(url)
         # browser.get(url)
-        # add_cookies()
         if page > 1:
             input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,'#mainsrp-pager div.form > input')))#找到页面底部页数跳转输入框
             submit = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR,'#mainsrp-pager div.form > span.btn.J_Submit')))#输入页数后，点击确定进行跳转
@@ -59,7 +59,6 @@ def index_page(page):
         index_page(page)
 
 def get_products():
-    #提取商品数
     html = browser.page_source
     doc = pq(html)
     #提取了商品列表，此时使用的CSS选择器是#mainsrp-itemlist .items .item，它会匹配整个页面的每个商品。它的匹配结果是多个
@@ -74,7 +73,8 @@ def get_products():
             'shop':item.find('.shop').text(),#商家
             'location':item.find('.location').text()#商家地址
         }
-        save_to_mongo(product)
+        print(product)
+        # save_to_mongo(product)
 
 #将爬取的结果存入mongodb中
 def save_to_mongo(product):
