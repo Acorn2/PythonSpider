@@ -5,6 +5,7 @@ author:Herish
 datetime:2019/3/3 14:27
 software: PyCharm
 description: 利用Selenium抓取淘宝商品并用pyquery解析得到商品的图片、名称、价格、购买人数、店铺名称和店铺所在地信息，并将其保存到MongoDB。
+学习网址：https://blog.csdn.net/qq_29027865/article/details/83377660
 '''
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException

@@ -59,3 +59,11 @@ text = '''
 html = etree.HTML(text)
 result = html.xpath('//li[contains(@class,"li")]/a/text()')
 print(result)
+
+
+'''part7'''
+
+html = etree.HTML(text)
+result = html.xpath('//li[@class="sky skyid lv3 on"]')[0]
+wea = result.xpath('p[@class="wea"]/text()')[0]
+tem = result.xpath('p[@class="tem"]')[0].xpath('string(.)')#string()提取多个子节点中的文本

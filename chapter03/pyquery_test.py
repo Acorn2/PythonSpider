@@ -53,3 +53,20 @@ items = doc('.list')
 lis = items.find('li')
 print(lis)
 print(items.children())
+print(doc('.item'))
+
+
+'''part4'''
+
+doc = pq(html)
+#标签不完全一致
+items = doc('.billboard-songs .table-container .odd').items()
+odd_data = []
+for item in items:
+    song = {
+        'index': item.find('.em.index').text(),
+        'name': item.find('.song-name').text(),
+        'url' : 'https://www.xiami.com'+item.find('.song-name > a ').attr('href'),
+        'singer': item.find('.singers').text(),
+        'time': item.find('.duration-container .duration ').text()
+    }

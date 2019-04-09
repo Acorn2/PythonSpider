@@ -5,6 +5,7 @@ author:Herish
 datetime:2019/3/11 17:23
 software: PyCharm
 description: 在百度学术网站下载论文参考文献
+后续学习可以参考：https://blog.csdn.net/llh_1178/article/details/80558274
 '''
 
 import requests,os,re
