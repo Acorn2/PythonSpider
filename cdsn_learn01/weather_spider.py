@@ -56,7 +56,11 @@ def get_weather(url):
     text = get_page(url)
 
     html = etree.HTML(text)
-    result = html.xpath('//li[@class="sky skyid lv3 on"]')[0]
+    # result = html.xpath('//li[@class="sky skyid lv2 on"]')[0]
+    try:
+        result = html.xpath('//li[@class="sky skyid lv3 on"]')[0]
+    except:
+        result = html.xpath('//li[@class="sky skyid lv2 on"]')[0]
 
     wea = result.xpath('p[@class="wea"]/text()')[0].replace('\n', '').replace('\t', '')
     tem = result.xpath('p[@class="tem"]')[0].xpath('string(.)').replace('\n', '').replace('\t','')  # string()提取多个子节点中的文本
@@ -93,8 +97,9 @@ def send_email(mess ,to_addr):
     server.quit()
 
 if __name__ == '__main__':
-    name = "枣阳"
+    name = "荆州"
     city = read_mongo(name)
+    print(city)
     city_base_url = 'http://www.weather.com.cn/weather/{}.shtml'
     curl = city_base_url.format(city['id'])
     wea, tem, win = get_weather(curl)
