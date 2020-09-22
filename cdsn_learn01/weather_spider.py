@@ -77,7 +77,7 @@ def send_email(mess ,to_addr):
     # SMTP服务器以及相关配置信息
     smtp_server = 'smtp.163.com'    #163邮箱用到的SMTP服务器
     from_addr = 'hkyy521@163.com'
-    password = 'gzy521695'      #上面代码中发送方是163邮箱，所以密码不是邮箱的登录密码，而是手动开启SMTP协议后设置或分配的授权码！，但如果是Gmail则使用的密码是登录密码
+    password = '12345678'      #上面代码中发送方是163邮箱，所以密码不是邮箱的登录密码，而是手动开启SMTP协议后设置或分配的授权码！，但如果是Gmail则使用的密码是登录密码
     # to_addr = '1739468244@qq.com'
 
     msg = MIMEText(mess, 'plain', 'utf-8')
